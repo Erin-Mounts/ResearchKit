@@ -264,10 +264,16 @@
         if (![fileManager removeItemAtPath:[url path] error:error]) {
             return NO;
         }
+#if DEBUG
+        NSLog(@"Removed audio file at %@", [url path]);
+#endif
     }
     
     [fileManager createFileAtPath:[url path] contents:nil attributes:nil];
     [fileManager setAttributes:@{NSFileProtectionKey: ORKFileProtectionFromMode(ORKFileProtectionCompleteUnlessOpen)} ofItemAtPath:[url path] error:error];
+#if DEBUG
+    NSLog(@"Creating audio file at %@", [url path]);
+#endif
     return YES;
 }
 
